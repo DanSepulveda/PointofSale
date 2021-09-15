@@ -1,6 +1,8 @@
+const path = require('path')
+
 const productControllers = {
     getProducts: (req, res) => {
-        console.log('hola')
+        res.sendFile(path.join(__dirname, '..', 'views/index.html'))
     }
 }
 
