@@ -31,12 +31,24 @@ nav{
     flex-direction: column;
 }
 
-nav a{
+nav img{
+    margin-top: 3vh;
+    margin-bottom: 5vh;
+}
+
+nav a,
+nav p{
     font-size: 3vmin;
     margin: .5em;
     color: white;
     text-decoration: none;
     text-transform: uppercase;
+}
+
+nav p{
+    text-align: center;
+    border-top: 1px solid white;
+    border-bottom: 1px solid white;
 }
 
 /* MAIN */
@@ -64,38 +76,54 @@ main div.storeInformation{
     color: #444;
 }
 
+.storeInformation .user{
+    display: flex;
+    align-items: center;
+
+}
+
+.user span{
+    font-size: 20px;
+    font-weight: bold;
+    margin-right: .5em;
+}
+
+.user .userPic{
+    width: 8vh;
+    height: 8vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 100%;
+}
+
 main div.mainContainer{
     width: 100%;
     height: 90%;
     display: flex;
     flex-wrap: nowrap;
-    background-color: #eee;
+    background-color: #ecc75780;
 }
 
 /* PRODUCT LIST */
 div.mainContainer .productList{
     width: 65%;
     margin: 2vh 1vw;
-    border-radius: 3px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
 
-.productList h2{
-    text-align: center;
-    color: #444;
-}
-
 .products{
-    height: 55%;
+    height: 65%;
     padding: 0 1vw;
-    border-radius: 20px;
+    border-radius: 5px;
     background-color: white;
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
     overflow-y: scroll;
+    box-shadow: 1px 1px 5px black, -1px -1px 5px black;
 }
 /* .products::-webkit-scrollbar {
     border-top-right-radius: 20px;
@@ -121,6 +149,10 @@ div.mainContainer .productList{
     border: 1px solid #444;
     cursor: pointer;
     transition: all 300ms;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .productPic{
@@ -131,27 +163,23 @@ div.mainContainer .productList{
     background-size: cover;
 }
 
-.product p{
-    font-weight: bold;
-    text-align: center;
-    margin-top: 1em;
-}
-
 .categories{
     padding: .5em;
-    height: 28%;
+    height: 32%;
     background-color: white;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
     justify-content: space-around;
     overflow-x: scroll;
+    border-radius: 5px;
+    box-shadow: 1px 1px 5px black, -1px -1px 5px black;
 
 }
 
 .category{
     background-color: #eee;
-    width: 12vw;
+    min-width: 12vw;
     height: 40%;
     margin-right: 1em;
     padding: .5em;
@@ -188,9 +216,163 @@ div.mainContainer .productList{
 div.mainContainer .resume{
     width: 35%;
     margin: 2vh 1vw;
-    border-radius: 3px;
+    border-radius: 5px;
     background-color: white;
+    box-shadow: 1px 1px 5px black, -1px -1px 5px black;
+    padding: 3vh;
+    display: flex;
+    flex-direction: column;
 }
+
+.resume .title{
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.title input{
+    padding: 5px 10px;
+    margin-right: 2em;
+    border-radius: 5px;
+    outline: none;
+    flex: 1;
+}
+
+.title input::-webkit-outer-spin-button,
+.title input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.resume .details{
+    margin-top: 5px;
+    margin-bottom: 5px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.details .header,
+.details .footer{
+    display: flex;
+}
+
+.header p,
+.footer p{
+    width: 30%;
+    text-align: center;
+    font-size: 20px;
+    background-color: #eee;
+    padding: 3px 0;
+}
+.singleProduct{
+    display: flex;
+    margin-top: 5px;
+    margin-bottom: 3px;
+    border-bottom: 1px solid #444;
+}
+
+.singleProduct p{
+    text-align: center;
+    width: 30%;
+    font-size: 17px;
+}
+
+.header p:first-child,
+.body .singleProduct p:first-child,
+.footer p:first-child{
+    width: 50%;
+}
+
+.header p:nth-child(2),
+.body .singleProduct p:nth-child(2),
+.footer p:nth-child(2){
+    width: 20%;
+}
+
+.details .body{
+    flex: 1;
+    overflow-y: scroll;
+}
+
+.singleProduct p:first-child{
+    text-align: left;
+    margin-left: 10px;
+}
+
+.singleProduct i.fa-trash-alt{
+    margin-right: 5px;
+    color: #444;
+    cursor: pointer;
+    transition: all 300ms;
+}
+
+.singleProduct i.fa-trash-alt:hover{
+    color: red;
+}
+
+.resume .payment{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 1em;
+}
+
+.payment h3{
+    width: 100%;
+    color:rgb(47, 47, 47);
+    text-align: center;
+}
+
+.payment p{
+    width: calc((100% / 3) - 20px);
+    color: rgb(47, 47, 47);
+    text-align: center;
+    padding: 1vh 0;
+    border-radius: .5em;
+    border: 2px solid rgb(47, 47, 47);
+    cursor: pointer;
+    transition: all 300ms;
+}
+
+.payment p:hover{
+    color: white;
+    background-color: rgb(47, 47, 47);
+
+}
+
+.finish{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.finish p{
+    width: calc((100% / 3) - 20px);
+    text-align: center;
+    padding: 1vh 0;
+    border-radius: .5em;
+    color: green;
+    border: 2px solid green;
+    cursor: pointer;
+    transition: all 300ms;
+}
+
+.finish p:first-child{
+    color: red;
+    border: 2px solid red;
+    margin-right: 1em;
+}
+
+.finish p:hover{
+    background-color: green;
+    color: white;
+}
+
+.finish p:first-child:hover{
+    background-color: red;
+}
+
 
 
 /* FOOTER */
@@ -201,6 +383,10 @@ footer{
     display: flex;
     justify-content: space-between;
     padding: 0 2em;
+}
+
+footer i{
+    color: white;
 }
 
 footer .contact{
