@@ -92,16 +92,12 @@ const productControllers = {
                 //     allProducts
                 // })
             } else {
-                const newSale = new Sale()
-                await newSale.save()
-                const sale = Sale.findOne({ _id: newSale._id })
                 page = {
                     view: 'new-sale',
                     options: {
                         title: 'Nueva Venta - Vencil',
                         heading: 'Nueva Venta',
                         allProducts,
-                        newSale
                     }
                 }
                 // res.render('new-sale', {

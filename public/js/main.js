@@ -3,8 +3,6 @@ const filterProducts = (products, category) => {
     return filtered
 }
 
-const hola = 'hola'
-
 const addToCart = (id, name, price) => {
     let qty = 1
     let father = document.getElementById('shoopingCart')
@@ -14,6 +12,7 @@ const addToCart = (id, name, price) => {
 
     let block = document.createElement('div')
     block.className = "singleProduct"
+    block.id = id
     block.innerHTML = `<p><i class="far fa-trash-alt"></i>${name}</p>
     <p>
         <i class="fas fa-chevron-circle-down"></i>
