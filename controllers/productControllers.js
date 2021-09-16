@@ -38,6 +38,41 @@ const productControllers = {
             heading: 'Clientes'
         })
     },
+    sale: async (req, res) => {
+        try {
+            const newSale = new Sale()
+            await newSale.save()
+            res.redirect(`nueva-venta/${newSale._id}`)
+        } catch (error) {
+            console.log(error)
+        }
+    },
+    newSale: async (req, res) => {
+        let allProducts = await Product.find()
+        let sale = await Sale.findOne({ _id: req.params.id })
+        let page = {
+            view: 'new-sale',
+            options: {
+                title: 'Nueva Venta - Vencil',
+                heading: 'Nueva Venta',
+                allProducts,
+                sale
+            }
+        }
+        res.render(page.view, { ...page.options })
+    },
+    updateSale: async (req, res) => {
+        const { product, qty, price } = req.query
+        try {
+            await Sale.findOneAndUpdate(
+                { _id: req.params.id },
+                { $push: { 'products': { product, qty, price } } }
+            )
+            res.redirect(`/nueva-venta/${req.params.id}`)
+        } catch (error) {
+
+        }
+    },
 
     // ya funciona
     createProduct: async (req, res) => {

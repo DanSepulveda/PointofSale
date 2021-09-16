@@ -1,4 +1,5 @@
 const express = require("express");
+const { get } = require("mongoose");
 
 const productControllers = require('../controllers/productControllers')
 
@@ -24,7 +25,13 @@ router.route('/clientes')
 
 // ya funciona
 router.route('/nueva-venta')
-    .get(productControllers.readProducts)
+    .get(productControllers.sale)
+
+router.route('/nueva-venta/:id')
+    .get(productControllers.newSale)
+
+router.route('/nueva-venta/editar/:id')
+    .get(productControllers.updateSale)
 
 // ya funciona
 router.route('/productos')

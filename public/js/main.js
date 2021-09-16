@@ -3,38 +3,39 @@ const filterProducts = (products, category) => {
     return filtered
 }
 
-const hola = 'hola'
+const products = []
 
-const addToCart = (id, name, price) => {
+
+
+const addToCart = (id, name, price, saleId) => {
     let qty = 1
-    let father = document.getElementById('shoopingCart')
-    console.log(Array.from(father.childNodes))
+    window.location.href = `/nueva-venta/editar/${saleId}?product=${id}&qty=${qty}&price=${price}`
+    // console.log(saleId)
+    // let qty = 1
+    // let father = document.getElementById('shoopingCart')
+    // console.log(Array.from(father.childNodes))
     // father.childNodes
     // father.children
 
-    let block = document.createElement('div')
-    block.className = "singleProduct"
-    block.innerHTML = `<p><i class="far fa-trash-alt"></i>${name}</p>
-    <p>
-        <i class="fas fa-chevron-circle-down"></i>
-        ${qty}
-        <i class="fas fa-chevron-circle-up"></i>
-    </p>
-    <p>$${price}</p>`
-    father.appendChild(block)
-
-
-
-
-    // < div class="singleProduct" >
-    //                 <p><i class="far fa-trash-alt"></i>Harina 1kg.</p>
-    //                 <p>
-    //                     <i class="fas fa-chevron-circle-down"></i>
-    //                     3
-    //                     <i class="fas fa-chevron-circle-up"></i>
-    //                 </p>
-    //                 <p>$1.890</p>
-    //             </div >
+    // let block = document.createElement('div')
+    // block.className = "singleProduct"
+    // block.innerHTML = `<p><i class="far fa-trash-alt"></i>${name}</p>
+    // <p>
+    //     <i class="fas fa-chevron-circle-down"></i>
+    //     ${qty}
+    //     <i class="fas fa-chevron-circle-up"></i>
+    // </p>
+    // <p>$${price}</p>`
+    // father.appendChild(block)
+    // fetch('/nueva-venta/' + saleId, {
+    //     method: 'PUT',
+    //     headers: {
+    //         'Content-Type': 'application/json'
+    //     },
+    //     body: { name: 'daniel' }
+    // })
+    //     .then(res => res.json())
+    //     .then(response => console.log(response))
 }
 
 const confirmation = (id) => {
