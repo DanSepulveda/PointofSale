@@ -1,16 +1,18 @@
 const express = require("express");
-const cors = require("cors");
+// const cors = require("cors");
 const router = require("./routes/index");
 require("dotenv").config();
 require("./config/database");
-require("./config/passport")
+// require("./config/passport")
 
 const app = express()
 
 // MIDDLEWARE
 app.use(express.static('public'))
-app.use(cors())
-app.use(express.json())
+app.set('view engine', 'ejs')
+// app.use(cors())
+app.use(express.urlencoded({ extended: true })) //no recuerdo para qué funciona
+
 
 app.use('/', router)
 

@@ -1,0 +1,86 @@
+<%- include('partials/head.ejs') %>
+    <div class="mainContainer">
+        <div class="productList allProducts">
+            <table class="tableProducts">
+                <thead>
+                    <tr>
+                        <th>Imagen</th>
+                        <th>Nombre</th>
+                        <th>Categoría</th>
+                        <th>Marca</th>
+                        <th>Stock</th>
+                        <th>Precio</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% allProducts.forEach((product=>{ %>
+                        <tr id=<%=product._id%>>
+                            <td>
+                                <div class="productImage"
+                                    style="background-image: url('/assets/products/<%= product.image%>');"></div>
+                            </td>
+                            <td>
+                                <%= product.name%>
+                            </td>
+                            <td>
+                                <%= product.category%>
+                            </td>
+                            <td>
+                                <%= product.brand%>
+                            </td>
+                            <td>
+                                <%= product.stock%>
+                            </td>
+                            <td>
+                                $<%= product.price%>
+                            </td>
+                            <td>
+                                <div>
+                                    <% let id=product._id %>
+                                        <button><a href="/editar-producto/<%= product._id %>"><i
+                                                    class="far fa-edit"></i></a></button>
+                                        <button onclick="confirmation('<%= id%>')"><i
+                                                class="far fa-trash-alt"></i></button>
+                                </div>
+                            </td>
+                        </tr>
+                        <%}))%>
+                </tbody>
+                <tfooter>
+
+                </tfooter>
+            </table>
+        </div>
+        <%if(error){ alertify.alert("This is an alert dialog.", function(){ alertify.message('OK'); }); }%>
+            <div class="resume newProduct">
+                <h3>Cargar nuevo producto</h3>
+                <form class="newProduct" action="/productos" method="POST">
+                    <label for="name">Nombre</label>
+                    <input type="text" name="name" id="name" value="<%= editMode ? editMode.name : '' %>">
+                    <label for="category">Categoría</label>
+                    <input type="text" name="category" id="category" value="<%= editMode ? editMode.category : '' %>">
+                    <label for=" price">Precio de Venta</label>
+                    <input type="number" name="price" id="price" value="<%= editMode ? editMode.price : '' %>">
+                    <label for=" stock">Stock</label>
+                    <input type="number" name="stock" id="stock" value="<%= editMode ? editMode.stock : '' %>">
+                    <label for=" brand">Marca</label>
+                    <input type="text" name="brand" id="brand" value="<%= editMode ? editMode.brand : '' %>">
+                    <label for=" image">Imagen</label>
+                    <input type="text" name="image" id="image" value="<%= editMode ? editMode.image : '' %>">
+                    <input type="hidden" name="_id" value="<%= editMode ? editMode._id : null %>">
+                    <div>
+                        <input type="reset" value="Limpiar">
+                        <input type="submit" value="Agregar">
+                    </div>
+                </form>
+            </div>
+    </div>
+    <%- include('partials/footer.ejs') %>
+        <script src="https://kit.fontawesome.com/f119dc4da4.js" crossorigin="anonymous"></script>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+        <script src="/js/main.js"></script>
+        </body>
+
+        </html>
