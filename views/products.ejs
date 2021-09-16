@@ -36,9 +36,10 @@
                                 $<%= product.price%>
                             </td>
                             <td>
-                                <div>
+                                <div class="formButtons">
                                     <% let id=product._id %>
-                                        <button><a href="/editar-producto/<%= product._id %>"><i
+                                        <button value="<%= editMode._id===id? product._id : null%>"><a
+                                                href="/editar-producto/<%= product._id %>"><i
                                                     class="far fa-edit"></i></a></button>
                                         <button onclick="confirmation('<%= id%>')"><i
                                                 class="far fa-trash-alt"></i></button>
@@ -52,35 +53,39 @@
                 </tfooter>
             </table>
         </div>
-        <%if(error){ alertify.alert("This is an alert dialog.", function(){ alertify.message('OK'); }); }%>
-            <div class="resume newProduct">
-                <h3>Cargar nuevo producto</h3>
-                <form class="newProduct" action="/productos" method="POST">
-                    <label for="name">Nombre</label>
-                    <input type="text" name="name" id="name" value="<%= editMode ? editMode.name : '' %>">
-                    <label for="category">Categoría</label>
-                    <input type="text" name="category" id="category" value="<%= editMode ? editMode.category : '' %>">
-                    <label for=" price">Precio de Venta</label>
-                    <input type="number" name="price" id="price" value="<%= editMode ? editMode.price : '' %>">
-                    <label for=" stock">Stock</label>
-                    <input type="number" name="stock" id="stock" value="<%= editMode ? editMode.stock : '' %>">
-                    <label for=" brand">Marca</label>
-                    <input type="text" name="brand" id="brand" value="<%= editMode ? editMode.brand : '' %>">
-                    <label for=" image">Imagen</label>
-                    <input type="text" name="image" id="image" value="<%= editMode ? editMode.image : '' %>">
-                    <input type="hidden" name="_id" value="<%= editMode ? editMode._id : null %>">
-                    <div>
-                        <input type="reset" value="Limpiar">
-                        <input type="submit" value="Agregar">
-                    </div>
-                </form>
-            </div>
+        <%if(error){ alertify.alert("Algó salió mal. Contactar a soporte ", function(){ alertify.message('OK'); }); }%>
+            <div class=" resume newProduct">
+            <h3>
+                <%= editMode ? 'Editar producto' : 'Cargar nuevo producto' %>
+            </h3>
+            <form class="newProductForm" action="/productos" method="POST">
+                <label for="name">Nombre</label>
+                <input type="text" name="name" id="name" required value="<%= editMode ? editMode.name : '' %>">
+                <label for="category">Categoría</label>
+                <input type="text" name="category" id="category" required
+                    value="<%= editMode ? editMode.category : '' %>">
+                <label for=" price">Precio de Venta</label>
+                <input type="number" name="price" id="price" required value="<%= editMode ? editMode.price : '' %>">
+                <label for=" stock">Stock</label>
+                <input type="number" name="stock" id="stock" required value="<%= editMode ? editMode.stock : '' %>">
+                <label for=" brand">Marca</label>
+                <input type="text" name="brand" id="brand" required value="<%= editMode ? editMode.brand : '' %>">
+                <label for=" image">Imagen</label>
+                <input type="text" name="image" id="image" required value="<%= editMode ? editMode.image : '' %>">
+                <input type="hidden" name="_id" value="<%= editMode ? editMode._id : null %>">
+                <div class="buttonsSection">
+                    <% if(!editMode){ %>
+                        <button type="reset" value="Limpiar"><i class="fas fa-backspace"></i>Limpiar</button>
+                        <button type="submit" value="Agregar"><i class="fas fa-plus-circle"></i>Agregar
+                        </button>
+                        <% }else{ %>
+                            <button onclick="window.location.href='/productos'" value="Cancelar"><i
+                                    class="far fa-window-close"></i>Cancelar</button>
+                            <button type="submit" value="Actualizar"><i class="fas fa-sync-alt"></i>Actualizar
+                            </button>
+                            <% }; %>
+                </div>
+            </form>
+    </div>
     </div>
     <%- include('partials/footer.ejs') %>
-        <script src="https://kit.fontawesome.com/f119dc4da4.js" crossorigin="anonymous"></script>
-        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
-        <script src="/js/main.js"></script>
-        </body>
-
-        </html>

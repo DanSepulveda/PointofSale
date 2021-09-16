@@ -1,9 +1,19 @@
 <%- include('partials/head.ejs') %>
     <div class="mainContainer">
+        <div id="cajaInput"></div>
+        <button onclick="funcioncita()">Agregar</button>
     </div>
     <%- include('partials/footer.ejs') %>
         <script src="https://kit.fontawesome.com/f119dc4da4.js" crossorigin="anonymous"></script>
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script>
+            const funcioncita = () => {
+                let cuadro = document.createElement('input')
+                cuadro.classList.add('inputcito')
+                cuadro.name = 'ingrediente'
+                document.getElementById('cajaInput').appendChild(cuadro)
+            }
+        </script>
         </body>
 
         </html>

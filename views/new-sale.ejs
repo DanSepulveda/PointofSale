@@ -2,16 +2,18 @@
     <div class="mainContainer">
         <div class="productList">
             <div class="products">
-                <% allProducts.forEach((product=>{ %>
-                    <div class="product" name="<%= product.category %>">
-                        <div class="productPic"
-                            style="background-image: url('./assets/products/<%= product.image %>');"></div>
-                        <span>
-                            <%= product.name %>
-                        </span>
-                        <span>$<%= product.price %></span>
-                    </div>
-                    <%}))%>
+                <% let filtered=allProducts %>
+                    <% filtered.forEach((product=>{ %>
+                        <div class="product" name="<%= product.category %>"
+                            onclick="addToCart('<%= product._id%>', '<%= product.name%>', '<%= product.price%>')">
+                            <div class="productPic"
+                                style="background-image: url('./assets/products/<%= product.image %>');"></div>
+                            <span>
+                                <%= product.name %>
+                            </span>
+                            <span>$<%= product.price %></span>
+                        </div>
+                        <%}))%>
             </div>
 
             <div class="categories">
@@ -19,7 +21,7 @@
                     <div class="categoryPic" style="background-image: url('./assets/abarrotes.png');"></div>
                     <p>Abarrotes</p>
                 </div>
-                <div class="category">
+                <div class="category" onclick="filter('abarrotes')">
                     <div class="categoryPic" style="background-image: url('./assets/frutas.png');"></div>
                     <p>Frutas</p>
                 </div>
@@ -58,81 +60,76 @@
                 <input type="number" placeholder="Ingrese el código de barra">
                 <i class="fas fa-search"></i>
             </div>
-
-            <div class="details">
-                <div class="header">
-                    <p>Nombre</p>
-                    <p>QTY</p>
-                    <p>Precio</p>
-                </div>
-                <div class="body">
-                    <div class="singleProduct">
-                        <p><i class="far fa-trash-alt"></i>Harina 1kg.</p>
-                        <p>
-                            <i class="fas fa-chevron-circle-down"></i>
-                            3
-                            <i class="fas fa-chevron-circle-up"></i>
-                        </p>
-                        <p>$1.890</p>
+            <% console.log(newSale._id) %>
+                <div class="details">
+                    <div class="header">
+                        <p>Nombre</p>
+                        <p>QTY</p>
+                        <p>Precio</p>
                     </div>
-                    <div class="singleProduct">
-                        <p><i class="far fa-trash-alt"></i>Azúcar 1kg.</p>
-                        <p>
-                            <i class="fas fa-chevron-circle-down"></i>
-                            2
-                            <i class="fas fa-chevron-circle-up"></i>
-                        </p>
-                        <p>$1.658</p>
+                    <div class="body" id="shoopingCart">
+                        <div class="singleProduct">
+                            <p><i class="far fa-trash-alt"></i>Harina 1kg.</p>
+                            <p>
+                                <i class="fas fa-chevron-circle-down"></i>
+                                3
+                                <i class="fas fa-chevron-circle-up"></i>
+                            </p>
+                            <p>$1.890</p>
+                        </div>
+                        <div class="singleProduct">
+                            <p><i class="far fa-trash-alt"></i>Azúcar 1kg.</p>
+                            <p>
+                                <i class="fas fa-chevron-circle-down"></i>
+                                2
+                                <i class="fas fa-chevron-circle-up"></i>
+                            </p>
+                            <p>$1.658</p>
+                        </div>
+                        <div class="singleProduct">
+                            <p><i class="far fa-trash-alt"></i>Fideos 400g.</p>
+                            <p>
+                                <i class="fas fa-chevron-circle-down"></i>
+                                3
+                                <i class="fas fa-chevron-circle-up"></i>
+                            </p>
+                            <p>$2.070</p>
+                        </div>
                     </div>
-                    <div class="singleProduct">
-                        <p><i class="far fa-trash-alt"></i>Fideos 400g.</p>
-                        <p>
-                            <i class="fas fa-chevron-circle-down"></i>
-                            3
-                            <i class="fas fa-chevron-circle-up"></i>
-                        </p>
-                        <p>$2.070</p>
+                    <div class="footer">
+                        <p>Total</p>
+                        <p>8</p>
+                        <p>$5.618</p>
                     </div>
                 </div>
-                <div class="footer">
-                    <p>Total</p>
-                    <p>8</p>
-                    <p>$5.618</p>
+
+                <div class="payment">
+                    <h3>Método de Pago</h3>
+                    <p>
+                        <i class="far fa-money-bill-alt"></i>
+                        Efectivo
+                    </p>
+                    <p>
+                        <i class="far fa-credit-card"></i>
+                        Débito
+                    </p>
+                    <p>
+                        <i class="far fa-credit-card"></i>
+                        Crédito
+                    </p>
                 </div>
-            </div>
 
-            <div class="payment">
-                <h3>Método de Pago</h3>
-                <p>
-                    <i class="far fa-money-bill-alt"></i>
-                    Efectivo
-                </p>
-                <p>
-                    <i class="far fa-credit-card"></i>
-                    Débito
-                </p>
-                <p>
-                    <i class="far fa-credit-card"></i>
-                    Crédito
-                </p>
-            </div>
+                <div class="finish">
+                    <p>
+                        <i class="fas fa-backspace"></i>
+                        Cancelar
+                    </p>
+                    <p>
+                        <i class="fas fa-share-square"></i>
+                        Finalizar
+                    </p>
 
-            <div class="finish">
-                <p>
-                    <i class="fas fa-backspace"></i>
-                    Cancelar
-                </p>
-                <p>
-                    <i class="fas fa-share-square"></i>
-                    Finalizar
-                </p>
-
-            </div>
+                </div>
         </div>
     </div>
     <%- include('partials/footer.ejs') %>
-
-        <script src="https://kit.fontawesome.com/f119dc4da4.js" crossorigin="anonymous"></script>
-        </body>
-
-        </html>

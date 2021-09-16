@@ -1,5 +1,6 @@
 const path = require('path')
 const Product = require('../models/Product')
+const Sale = require('../models/Sale')
 
 const productControllers = {
     home: (req, res) => {
@@ -91,12 +92,16 @@ const productControllers = {
                 //     allProducts
                 // })
             } else {
+                const newSale = new Sale()
+                await newSale.save()
+                const sale = Sale.findOne({ _id: newSale._id })
                 page = {
                     view: 'new-sale',
                     options: {
                         title: 'Nueva Venta - Vencil',
                         heading: 'Nueva Venta',
-                        allProducts
+                        allProducts,
+                        newSale
                     }
                 }
                 // res.render('new-sale', {
@@ -113,8 +118,11 @@ const productControllers = {
     },
     //
     updateProduct: async (req, res) => {
+        console.log(req)
         const allProducts = await Product.find()
         const productToEdit = await Product.findOne({ _id: req.params.id })
+        var idNum = productToEdit._id.toString()
+        console.log(idNum)
         res.render('products', {
             title: 'Editar producto - Vencil',
             heading: 'Editar producto',
