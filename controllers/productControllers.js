@@ -1,6 +1,4 @@
-const path = require('path')
 const Product = require('../models/Product')
-const Sale = require('../models/Sale')
 
 const productControllers = {
     home: (req, res) => {
@@ -38,7 +36,6 @@ const productControllers = {
             heading: 'Clientes'
         })
     },
-
     // ya funciona
     createProduct: async (req, res) => {
         const { name, category, brand, stock, price, image, _id } = req.body
@@ -97,6 +94,7 @@ const productControllers = {
                     options: {
                         title: 'Nueva Venta - Vencil',
                         heading: 'Nueva Venta',
+                        message: false,
                         allProducts,
                     }
                 }

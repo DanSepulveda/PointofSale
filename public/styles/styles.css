@@ -333,7 +333,7 @@ div.mainContainer .resume{
     text-align: center;
 }
 
-.payment p{
+.payment button{
     width: calc((100% / 3) - 20px);
     color: rgb(47, 47, 47);
     text-align: center;
@@ -344,7 +344,7 @@ div.mainContainer .resume{
     transition: all 300ms;
 }
 
-.payment p:hover{
+.payment button:hover{
     color: white;
     background-color: rgb(47, 47, 47);
 
@@ -356,7 +356,14 @@ div.mainContainer .resume{
     justify-content: center;
 }
 
-.finish p{
+.payment .selected,
+.payment .selected:hover{
+    border: none;
+    color: white;
+    background-color: #157EFB;
+}
+
+.finish button{
     width: calc((100% / 3) - 20px);
     text-align: center;
     padding: 1vh 0;
@@ -367,18 +374,18 @@ div.mainContainer .resume{
     transition: all 300ms;
 }
 
-.finish p:first-child{
+.finish button:first-child{
     color: red;
     border: 2px solid red;
     margin-right: 1em;
 }
 
-.finish p:hover{
+.finish button:hover{
     background-color: green;
     color: white;
 }
 
-.finish p:first-child:hover{
+.finish button:first-child:hover{
     background-color: red;
 }
 
@@ -538,3 +545,65 @@ footer .info{
     justify-content: flex-end;
     align-items: center;
 }
+
+.errorContainer{
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.errorMessage{
+    width: 50%;
+    height: 50%;
+    background-color: #444;
+    color: white;
+    border-radius: 3em;
+    box-shadow: 3px 3px 10px black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 4vw;
+}
+
+.errorPic{
+    width: 32vh;
+    height: 30vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin-right: 2em;
+}
+
+.description{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.description h3{
+    text-align: center;
+}
+
+.description button{
+    margin-top: 5vh;
+    text-align: center;
+    padding: 1vh 1vw;
+    border-radius: .5em;
+    background-color: #157EFB;
+    color: white;
+    border: 2px solid #157EFB;
+    cursor: pointer;
+    transition: all 300ms;
+}
+
+.description button:hover{
+    background-color: #146cd6;
+    border: 2px solid #0a2f5c;
+}
+

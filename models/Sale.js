@@ -1,9 +1,8 @@
 const mongoose = require('mongoose')
 
 const saleSchema = new mongoose.Schema({
-    completed: { type: Boolean, default: false },
     date: { type: Date },
-    customer: { type: mongoose.Types.ObjectId, path: "customer" },
+    // customer: { type: mongoose.Types.ObjectId, path: "customer" },
     products: [{
         product: { type: mongoose.Types.ObjectId, path: "product" },
         qty: { type: Number },

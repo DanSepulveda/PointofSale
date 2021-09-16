@@ -15,45 +15,58 @@
                         </div>
                         <%}))%>
             </div>
-
-            <div class="categories">
-                <div class="category">
-                    <div class="categoryPic" style="background-image: url('./assets/abarrotes.png');"></div>
-                    <p>Abarrotes</p>
+            <script src="/js/alertify.min.js"></script>
+            <% if(message){%>
+                <div class="errorContainer" id="errorContainer">
+                    <div class="errorMessage">
+                        <div class="errorPic" style="background-image: url('./assets/warning.png');"></div>
+                        <div class="description">
+                            <h3>Debe agregar productos y seleccionar el método de pago antes de finalizar la venta.</h3>
+                            <button onclick="closeAlert()">Aceptar</button>
+                        </div>
+                    </div>
                 </div>
-                <div class="category" onclick="filter('abarrotes')">
-                    <div class="categoryPic" style="background-image: url('./assets/frutas.png');"></div>
-                    <p>Frutas</p>
-                </div>
-                <div class="category">
-                    <div class="categoryPic" style="background-image: url('./assets/verduras.png');"></div>
-                    <p>Verduras</p>
-                </div>
-                <div class="category">
-                    <div class="categoryPic" style="background-image: url('./assets/panaderia.png');"></div>
-                    <p>Panadería</p>
-                </div>
-                <div class="category">
-                    <div class="categoryPic" style="background-image: url('./assets/lacteos.png');"></div>
-                    <p>Lácteos</p>
-                </div>
-                <div class="category">
-                    <div class="categoryPic" style="background-image: url('./assets/fiambres.png');"></div>
-                    <p>Fiambres</p>
-                </div>
-                <div class="category">
-                    <div class="categoryPic" style="background-image: url('./assets/congelados.png');"></div>
-                    <p>Congelados</p>
-                </div>
-                <div class="category">
-                    <div class="categoryPic" style="background-image: url('./assets/bebestibles.png');"></div>
-                    <p>Bebestibles</p>
-                </div>
-                <div class="category">
-                    <div class="categoryPic" style="background-image: url('./assets/helados.png');"></div>
-                    <p>Helados</p>
-                </div>
-            </div>
+                <%}%>
+                    <div class="categories">
+                        <div class="category">
+                            <div class="categoryPic" style="background-image: url('./assets/abarrotes.png');"></div>
+                            <p>Abarrotes</p>
+                        </div>
+                        <div class="category" onclick="filter('abarrotes')">
+                            <div class="categoryPic" style="background-image: url('./assets/frutas.png');"></div>
+                            <p>Frutas</p>
+                        </div>
+                        <div class="category">
+                            <div class="categoryPic" style="background-image: url('./assets/verduras.png');"></div>
+                            <p>Verduras</p>
+                        </div>
+                        <div class="category">
+                            <div class="categoryPic" style="background-image: url('./assets/panaderia.png');"></div>
+                            <p>Panadería</p>
+                        </div>
+                        <div class="category">
+                            <div class="categoryPic" style="background-image: url('./assets/lacteos.png');"></div>
+                            <p>Lácteos</p>
+                        </div>
+                        <div class="category">
+                            <div class="categoryPic" style="background-image: url('./assets/fiambres.png');"></div>
+                            <p>Fiambres</p>
+                        </div>
+                        <div class="category">
+                            <div class="categoryPic" style="background-image: url('./assets/congelados.png');">
+                            </div>
+                            <p>Congelados</p>
+                        </div>
+                        <div class="category">
+                            <div class="categoryPic" style="background-image: url('./assets/bebestibles.png');">
+                            </div>
+                            <p>Bebestibles</p>
+                        </div>
+                        <div class="category">
+                            <div class="categoryPic" style="background-image: url('./assets/helados.png');"></div>
+                            <p>Helados</p>
+                        </div>
+                    </div>
         </div>
         <div class="resume">
             <div class="title">
@@ -97,38 +110,40 @@
                 </div>
                 <div class="footer">
                     <p>Total</p>
-                    <p>8</p>
-                    <p>$5.618</p>
+                    <p id="totalUnits"></p>
+                    <p id="totalPrice"></p>
                 </div>
             </div>
 
             <div class="payment">
                 <h3>Método de Pago</h3>
-                <p>
+                <button onclick="changeMethod('Efectivo', this.id)" id="cashButton" class="paymentButton">
                     <i class="far fa-money-bill-alt"></i>
                     Efectivo
-                </p>
-                <p>
+                </button>
+                <button onclick="changeMethod('Débito', this.id)" id="debitButton" class="paymentButton">
                     <i class="far fa-credit-card"></i>
                     Débito
-                </p>
-                <p>
+                </button>
+                <button onclick="changeMethod('Crédito', this.id)" id="creditButton" class="paymentButton">
                     <i class="far fa-credit-card"></i>
                     Crédito
-                </p>
+                </button>
             </div>
-
-            <div class="finish">
-                <p>
-                    <i class="fas fa-backspace"></i>
-                    Cancelar
-                </p>
-                <p>
-                    <i class="fas fa-share-square"></i>
-                    Finalizar
-                </p>
-
-            </div>
+            <form action="/nueva-venta" method="POST">
+                <input type="hidden" name="products" id="productsInput" required>
+                <input type="hidden" name="paymentMethod" id="paymentInput" required>
+                <div class="finish">
+                    <button type="reset">
+                        <i class="fas fa-backspace"></i>
+                        Cancelar
+                    </button>
+                    <button type="submit">
+                        <i class="fas fa-share-square"></i>
+                        Finalizar
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
     <%- include('partials/footer.ejs') %>

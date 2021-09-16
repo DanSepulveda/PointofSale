@@ -1,6 +1,7 @@
 const express = require("express");
 
 const productControllers = require('../controllers/productControllers')
+const saleControllers = require('../controllers/saleControllers')
 
 const router = express.Router()
 
@@ -22,11 +23,13 @@ router.route('/historial-compras')
 router.route('/clientes')
     .get(productControllers.clients)
 
-// ya funciona
+
+// SALES
 router.route('/nueva-venta')
     .get(productControllers.readProducts)
+    .post(saleControllers.createSale)
 
-// ya funciona
+// PRODUCTS
 router.route('/productos')
     .post(productControllers.createProduct)
     .get(productControllers.readProducts)
@@ -34,7 +37,6 @@ router.route('/productos')
 router.route('/editar-producto/:id')
     .get(productControllers.updateProduct)
 
-// ya funciona
 router.route('/borrar-producto/:id')
     .delete(productControllers.deleteProduct)
 
