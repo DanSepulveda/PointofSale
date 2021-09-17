@@ -89,6 +89,7 @@ const productControllers = {
                 //     allProducts
                 // })
             } else {
+                console.log('hola')
                 page = {
                     view: 'new-sale',
                     options: {
@@ -110,7 +111,6 @@ const productControllers = {
         }
 
     },
-    //
     updateProduct: async (req, res) => {
         console.log(req)
         const allProducts = await Product.find()
@@ -126,7 +126,6 @@ const productControllers = {
         })
 
     },
-    // ya funciona
     deleteProduct: async (req, res) => {
         try {
             await Product.findOneAndDelete({ _id: req.params.id })

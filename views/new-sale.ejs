@@ -2,26 +2,30 @@
     <div class="mainContainer">
         <div class="productList">
             <div class="products">
-                <% let filtered=allProducts %>
-                    <% filtered.forEach((product=>{ %>
-                        <div class="product" name="<%= product.category %>"
-                            onclick="addToCart('<%= product._id%>', '<%= product.name%>', '<%= product.price%>')">
-                            <div class="productPic"
-                                style="background-image: url('./assets/products/<%= product.image %>');"></div>
+
+                <% allProducts.forEach((product=>{ %>
+                    <div class="product <%=product.stock==0 && 'noStock'%>" name="<%= product.category %>"
+                        onclick="addToCart('<%= product._id%>', '<%= product.name%>', '<%= product.price%>', '<%= product.stock%>')">
+                        <div class="productPic"
+                            style="background-image: url('./assets/products/<%= product.image %>');">
                             <span>
-                                <%= product.name %>
+                                <%=product.stock%>
                             </span>
-                            <span>$<%= product.price %></span>
                         </div>
-                        <%}))%>
+                        <span>
+                            <%= product.name %>
+                        </span>
+                        <span>$<%= product.price %></span>
+                    </div>
+                    <%}))%>
             </div>
-            <script src="/js/alertify.min.js"></script>
             <% if(message){%>
                 <div class="errorContainer" id="errorContainer">
                     <div class="errorMessage">
                         <div class="errorPic" style="background-image: url('./assets/warning.png');"></div>
                         <div class="description">
-                            <h3>Debe agregar productos y seleccionar el método de pago antes de finalizar la venta.</h3>
+                            <h3>Debe agregar productos y seleccionar el método de pago antes de finalizar la
+                                venta.</h3>
                             <button onclick="closeAlert()">Aceptar</button>
                         </div>
                     </div>
@@ -29,27 +33,33 @@
                 <%}%>
                     <div class="categories">
                         <div class="category">
-                            <div class="categoryPic" style="background-image: url('./assets/abarrotes.png');"></div>
+                            <div class="categoryPic" style="background-image: url('./assets/abarrotes.png');">
+                            </div>
                             <p>Abarrotes</p>
                         </div>
                         <div class="category" onclick="filter('abarrotes')">
-                            <div class="categoryPic" style="background-image: url('./assets/frutas.png');"></div>
+                            <div class="categoryPic" style="background-image: url('./assets/frutas.png');">
+                            </div>
                             <p>Frutas</p>
                         </div>
                         <div class="category">
-                            <div class="categoryPic" style="background-image: url('./assets/verduras.png');"></div>
+                            <div class="categoryPic" style="background-image: url('./assets/verduras.png');">
+                            </div>
                             <p>Verduras</p>
                         </div>
                         <div class="category">
-                            <div class="categoryPic" style="background-image: url('./assets/panaderia.png');"></div>
+                            <div class="categoryPic" style="background-image: url('./assets/panaderia.png');">
+                            </div>
                             <p>Panadería</p>
                         </div>
                         <div class="category">
-                            <div class="categoryPic" style="background-image: url('./assets/lacteos.png');"></div>
+                            <div class="categoryPic" style="background-image: url('./assets/lacteos.png');">
+                            </div>
                             <p>Lácteos</p>
                         </div>
                         <div class="category">
-                            <div class="categoryPic" style="background-image: url('./assets/fiambres.png');"></div>
+                            <div class="categoryPic" style="background-image: url('./assets/fiambres.png');">
+                            </div>
                             <p>Fiambres</p>
                         </div>
                         <div class="category">
@@ -63,7 +73,8 @@
                             <p>Bebestibles</p>
                         </div>
                         <div class="category">
-                            <div class="categoryPic" style="background-image: url('./assets/helados.png');"></div>
+                            <div class="categoryPic" style="background-image: url('./assets/helados.png');">
+                            </div>
                             <p>Helados</p>
                         </div>
                     </div>
@@ -88,24 +99,6 @@
                             <i class="fas fa-chevron-circle-up"></i>
                         </p>
                         <p>$1.890</p>
-                    </div>
-                    <div class="singleProduct">
-                        <p><i class="far fa-trash-alt"></i>Azúcar 1kg.</p>
-                        <p>
-                            <i class="fas fa-chevron-circle-down"></i>
-                            2
-                            <i class="fas fa-chevron-circle-up"></i>
-                        </p>
-                        <p>$1.658</p>
-                    </div>
-                    <div class="singleProduct">
-                        <p><i class="far fa-trash-alt"></i>Fideos 400g.</p>
-                        <p>
-                            <i class="fas fa-chevron-circle-down"></i>
-                            3
-                            <i class="fas fa-chevron-circle-up"></i>
-                        </p>
-                        <p>$2.070</p>
                     </div> -->
                 </div>
                 <div class="footer">

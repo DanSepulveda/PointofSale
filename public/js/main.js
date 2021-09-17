@@ -4,27 +4,7 @@ const filterProducts = (products, category) => {
 }
 
 let products = []
-const addToCart = (id, name, price) => {
-    let qty = 1
-    if (products.some(product => product.product === id)) {
-        let chosen = products.find(product => product.product == id)
-        chosen.qty += 1
-        document.getElementById(id).innerText = chosen.qty
-    } else {
-        products.push({ product: id, qty, price })
-        let father = document.getElementById('shoopingCart')
-        let block = document.createElement('div')
-        block.className = "singleProduct"
-        // block.id = id
-        block.innerHTML = `<p><i class="far fa-trash-alt"></i>${name}</p>
-        <p>
-            <i class="fas fa-chevron-circle-down"></i>
-            <span id="${id}">${qty}</span>
-            <i class="fas fa-chevron-circle-up"></i>
-        </p>
-        <p>$${price}</p>`
-        father.appendChild(block)
-    }
+const updateTotal = () => {
     let totalUnits = products.reduce((total, product) => {
         total += product.qty
         return total
@@ -35,14 +15,51 @@ const addToCart = (id, name, price) => {
         total += product.price * product.qty
         return total
     }, 0)
-    // Create our number formatter.
     const formatter = new Intl.NumberFormat('es-CL', {
         style: 'currency',
         currency: 'CLP',
     });
     document.getElementById('totalPrice').innerText = formatter.format(totalPrice)
     document.getElementById('productsInput').value = JSON.stringify(products)
-    console.log(products)
+
+}
+
+const addToCart = (id, name, price, stock, rest = false) => {
+    let qty = 1
+    if (products.some(product => product.product === id)) {
+        let chosen = products.find(product => product.product == id)
+        if (rest) {
+            if (chosen.qty > 1) {
+                chosen.qty -= 1
+            }
+        } else {
+            if (chosen.qty < stock) {
+                chosen.qty += 1
+            }
+        }
+        document.getElementById(id).innerText = chosen.qty
+    } else {
+        products.push({ product: id, qty, price })
+        let father = document.getElementById('shoopingCart')
+        let block = document.createElement('div')
+        block.className = "singleProduct"
+        block.id = name
+        block.innerHTML = `<p><i onclick="deleteProduct('${name}', '${id}')" class="far fa-trash-alt"></i>${name}</p>
+        <p>
+            <i class="fas fa-chevron-circle-down" onclick="addToCart('${id}', '${name}', '${price}','${stock}', true)"></i>
+            <span id="${id}">${qty}</span>
+            <i class="fas fa-chevron-circle-up" onclick="addToCart('${id}', '${name}', '${price}', '${stock}')"></i>
+        </p>
+        <p>$${price}</p>`
+        father.appendChild(block)
+    }
+    updateTotal()
+}
+
+const deleteProduct = (name, id) => {
+    products = products.filter((product) => product.product !== id)
+    document.getElementById(name).remove()
+    updateTotal()
 }
 
 const changeMethod = (method, id) => {
@@ -50,7 +67,6 @@ const changeMethod = (method, id) => {
     let buttons = Array.from(document.getElementsByClassName('paymentButton'))
     buttons.forEach((button) => button.classList.remove('selected'))
     document.getElementById(id).classList.add("selected")
-
 }
 
 const confirmation = (id) => {

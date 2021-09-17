@@ -13,7 +13,18 @@ const saleControllers = {
                 date: new Date()
             })
             await newSale.save()
+            products.forEach(async (product) => {
+                let chosen = await Product.findOne({ _id: product.product })
+                let newStock = chosen.stock - product.qty
+                await Product.findOneAndUpdate(
+                    { _id: product.product },
+                    { stock: newStock },
+                    { new: true }
+                )
+            })
+            let allProducts = await Product.find()
             res.redirect('/nueva-venta')
+
         } catch (error) {
             let allProducts = await Product.find()
             res.render('new-sale', {
@@ -23,7 +34,7 @@ const saleControllers = {
                 allProducts,
             })
         }
-    }
+    },
 }
 
 module.exports = saleControllers

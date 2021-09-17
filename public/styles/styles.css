@@ -172,6 +172,23 @@ div.mainContainer .productList{
     background-size: cover;
 }
 
+.productPic span{
+    background-color: #FFC107;
+    color: #444;
+    padding: .5em;
+    border-radius: 100%;
+}
+
+.noStock{
+    background-color: #444;
+    color: white;
+    pointer-events: none;
+}
+.noStock .productPic span{
+    background-color: red;
+    color: black;
+}
+
 .categories{
     padding: .5em;
     height: 32%;
@@ -279,6 +296,11 @@ div.mainContainer .resume{
     margin-top: 5px;
     margin-bottom: 3px;
     border-bottom: 1px solid #444;
+}
+
+.singleProduct i.fa-chevron-circle-down,
+.singleProduct i.fa-chevron-circle-up{
+    cursor: pointer;
 }
 
 .singleProduct p{
@@ -606,4 +628,3 @@ footer .info{
     background-color: #146cd6;
     border: 2px solid #0a2f5c;
 }
-
