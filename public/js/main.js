@@ -1,6 +1,12 @@
-const filterProducts = (products, category) => {
-    let filtered = products.filter((product) => product.category === category)
-    return filtered
+const filterProducts = (category) => {
+    let allProducts = Array.from(document.getElementById('productsToFilter').children)
+    allProducts.forEach((product) => {
+        if (product.className.includes(category) || category == "Todos") {
+            product.classList.remove('hidden')
+        } else {
+            product.classList.add('hidden')
+        }
+    })
 }
 
 let products = []
@@ -21,7 +27,6 @@ const updateTotal = () => {
     });
     document.getElementById('totalPrice').innerText = formatter.format(totalPrice)
     document.getElementById('productsInput').value = JSON.stringify(products)
-
 }
 
 const addToCart = (id, name, price, stock, rest = false) => {
@@ -67,6 +72,11 @@ const changeMethod = (method, id) => {
     let buttons = Array.from(document.getElementsByClassName('paymentButton'))
     buttons.forEach((button) => button.classList.remove('selected'))
     document.getElementById(id).classList.add("selected")
+}
+
+const clearCart = () => {
+    products = []
+    document.getElementById('shoopingCart').innerHTML = ''
 }
 
 const confirmation = (id) => {

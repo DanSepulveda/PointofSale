@@ -27,10 +27,23 @@ const saleControllers = {
 
         } catch (error) {
             let allProducts = await Product.find()
+            let categories = [
+                { name: 'Todos', image: 'todos.png' },
+                { name: 'Abarrotes', image: 'abarrotes.png' },
+                { name: 'Frutas', image: 'frutas.png' },
+                { name: 'Verduras', image: 'verduras.png' },
+                { name: 'Panaderia', image: 'panaderia.png' },
+                { name: 'Lacteos', image: 'lacteos.png' },
+                { name: 'Fiambres', image: 'fiambres.png' },
+                { name: 'Congelados', image: 'congelados.png' },
+                { name: 'Bebestibles', image: 'bebestibles.png' },
+                { name: 'Helados', image: 'helados.png' },
+            ]
             res.render('new-sale', {
                 title: 'Nueva Venta - Vencil',
                 heading: 'Nueva Venta',
                 message: true,
+                categories,
                 allProducts,
             })
         }

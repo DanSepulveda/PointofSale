@@ -1,91 +1,92 @@
 <%- include('partials/head.ejs') %>
-    <div class="mainContainer">
-        <div class="productList allProducts">
-            <table class="tableProducts">
-                <thead>
-                    <tr>
-                        <th>Imagen</th>
-                        <th>Nombre</th>
-                        <th>Categoría</th>
-                        <th>Marca</th>
-                        <th>Stock</th>
-                        <th>Precio</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <% allProducts.forEach((product=>{ %>
-                        <tr id=<%=product._id%>>
-                            <td>
-                                <div class="productImage"
-                                    style="background-image: url('/assets/products/<%= product.image%>');"></div>
-                            </td>
-                            <td>
-                                <%= product.name%>
-                            </td>
-                            <td>
-                                <%= product.category%>
-                            </td>
-                            <td>
-                                <%= product.brand%>
-                            </td>
-                            <td>
-                                <%= product.stock%>
-                            </td>
-                            <td>
-                                $<%= product.price%>
-                            </td>
-                            <td>
-                                <div class="formButtons">
-                                    <% let id=product._id %>
-                                        <button value="<%= editMode._id===id? product._id : null%>"><a
-                                                href="/editar-producto/<%= product._id %>"><i
-                                                    class="far fa-edit"></i></a></button>
-                                        <button onclick="confirmation('<%= id%>')"><i
-                                                class="far fa-trash-alt"></i></button>
-                                </div>
-                            </td>
+    <%- include('partials/header.ejs') %>
+        <div class="mainContainer">
+            <div class="productList allProducts">
+                <table class="tableProducts">
+                    <thead>
+                        <tr>
+                            <th>Imagen</th>
+                            <th>Nombre</th>
+                            <th>Categoría</th>
+                            <th>Marca</th>
+                            <th>Stock</th>
+                            <th>Precio</th>
+                            <th>Acciones</th>
                         </tr>
-                        <%}))%>
-                </tbody>
-                <tfooter>
+                    </thead>
+                    <tbody>
+                        <% allProducts.forEach((product=>{ %>
+                            <tr id=<%=product._id%>>
+                                <td>
+                                    <div class="productImage"
+                                        style="background-image: url('/assets/products/<%= product.image%>');"></div>
+                                </td>
+                                <td>
+                                    <%= product.name%>
+                                </td>
+                                <td>
+                                    <%= product.category%>
+                                </td>
+                                <td>
+                                    <%= product.brand%>
+                                </td>
+                                <td>
+                                    <%= product.stock%>
+                                </td>
+                                <td>
+                                    $<%= product.price%>
+                                </td>
+                                <td>
+                                    <div class="formButtons">
+                                        <% let id=product._id %>
+                                            <button value="<%= editMode._id===id? product._id : null%>"><a
+                                                    href="/editar-producto/<%= product._id %>"><i
+                                                        class="far fa-edit"></i></a></button>
+                                            <button onclick="confirmation('<%= id%>')"><i
+                                                    class="far fa-trash-alt"></i></button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <%}))%>
+                    </tbody>
+                    <tfooter>
 
-                </tfooter>
-            </table>
-        </div>
-        <%if(error){ alertify.alert("Algó salió mal. Contactar a soporte ", function(){ alertify.message('OK'); }); }%>
+                    </tfooter>
+                </table>
+            </div>
+            <%if(error){ alertify.alert("Algó salió mal. Contactar a soporte ", function(){ alertify.message('OK'); }); }%>
             <div class=" resume newProduct">
-            <h3>
-                <%= editMode ? 'Editar producto' : 'Cargar nuevo producto' %>
-            </h3>
-            <form class="newProductForm" action="/productos" method="POST">
-                <label for="name">Nombre</label>
-                <input type="text" name="name" id="name" required value="<%= editMode ? editMode.name : '' %>">
-                <label for="category">Categoría</label>
-                <input type="text" name="category" id="category" required
-                    value="<%= editMode ? editMode.category : '' %>">
-                <label for=" price">Precio de Venta</label>
-                <input type="number" name="price" id="price" required value="<%= editMode ? editMode.price : '' %>">
-                <label for=" stock">Stock</label>
-                <input type="number" name="stock" id="stock" required value="<%= editMode ? editMode.stock : '' %>">
-                <label for=" brand">Marca</label>
-                <input type="text" name="brand" id="brand" required value="<%= editMode ? editMode.brand : '' %>">
-                <label for=" image">Imagen</label>
-                <input type="text" name="image" id="image" required value="<%= editMode ? editMode.image : '' %>">
-                <input type="hidden" name="_id" value="<%= editMode ? editMode._id : null %>">
-                <div class="buttonsSection">
-                    <% if(!editMode){ %>
-                        <button type="reset" value="Limpiar"><i class="fas fa-backspace"></i>Limpiar</button>
-                        <button type="submit" value="Agregar"><i class="fas fa-plus-circle"></i>Agregar
-                        </button>
-                        <% }else{ %>
-                            <button onclick="window.location.href='/productos'" value="Cancelar"><i
-                                    class="far fa-window-close"></i>Cancelar</button>
-                            <button type="submit" value="Actualizar"><i class="fas fa-sync-alt"></i>Actualizar
+                <h3>
+                    <%= editMode ? 'Editar producto' : 'Cargar nuevo producto' %>
+                </h3>
+                <form class="newProductForm" action="/productos" method="POST">
+                    <label for="name">Nombre</label>
+                    <input type="text" name="name" id="name" required value="<%= editMode ? editMode.name : '' %>">
+                    <label for="category">Categoría</label>
+                    <input type="text" name="category" id="category" required
+                        value="<%= editMode ? editMode.category : '' %>">
+                    <label for=" price">Precio de Venta</label>
+                    <input type="number" name="price" id="price" required value="<%= editMode ? editMode.price : '' %>">
+                    <label for=" stock">Stock</label>
+                    <input type="number" name="stock" id="stock" required value="<%= editMode ? editMode.stock : '' %>">
+                    <label for=" brand">Marca</label>
+                    <input type="text" name="brand" id="brand" required value="<%= editMode ? editMode.brand : '' %>">
+                    <label for=" image">Imagen</label>
+                    <input type="text" name="image" id="image" required value="<%= editMode ? editMode.image : '' %>">
+                    <input type="hidden" name="_id" value="<%= editMode ? editMode._id : null %>">
+                    <div class="buttonsSection">
+                        <% if(!editMode){ %>
+                            <button type="reset" value="Limpiar"><i class="fas fa-backspace"></i>Limpiar</button>
+                            <button type="submit" value="Agregar"><i class="fas fa-plus-circle"></i>Agregar
                             </button>
-                            <% }; %>
-                </div>
-            </form>
-    </div>
-    </div>
-    <%- include('partials/footer.ejs') %>
+                            <% }else{ %>
+                                <button onclick="window.location.href='/productos'" value="Cancelar"><i
+                                        class="far fa-window-close"></i>Cancelar</button>
+                                <button type="submit" value="Actualizar"><i class="fas fa-sync-alt"></i>Actualizar
+                                </button>
+                                <% }; %>
+                    </div>
+                </form>
+        </div>
+        </div>
+        <%- include('partials/footer.ejs') %>

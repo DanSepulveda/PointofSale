@@ -30,12 +30,7 @@ const productControllers = {
             heading: 'Historial de Compras'
         })
     },
-    clients: (req, res) => {
-        res.render('customers', {
-            title: 'Clientes - Vencil',
-            heading: 'Clientes'
-        })
-    },
+
     // ya funciona
     createProduct: async (req, res) => {
         const { name, category, brand, stock, price, image, _id } = req.body
@@ -89,13 +84,25 @@ const productControllers = {
                 //     allProducts
                 // })
             } else {
-                console.log('hola')
+                let categories = [
+                    { name: 'Todos', image: 'todos.png' },
+                    { name: 'Abarrotes', image: 'abarrotes.png' },
+                    { name: 'Frutas', image: 'frutas.png' },
+                    { name: 'Verduras', image: 'verduras.png' },
+                    { name: 'Panaderia', image: 'panaderia.png' },
+                    { name: 'Lacteos', image: 'lacteos.png' },
+                    { name: 'Fiambres', image: 'fiambres.png' },
+                    { name: 'Congelados', image: 'congelados.png' },
+                    { name: 'Bebestibles', image: 'bebestibles.png' },
+                    { name: 'Helados', image: 'helados.png' },
+                ]
                 page = {
                     view: 'new-sale',
                     options: {
                         title: 'Nueva Venta - Vencil',
                         heading: 'Nueva Venta',
                         message: false,
+                        categories,
                         allProducts,
                     }
                 }
@@ -112,11 +119,9 @@ const productControllers = {
 
     },
     updateProduct: async (req, res) => {
-        console.log(req)
         const allProducts = await Product.find()
         const productToEdit = await Product.findOne({ _id: req.params.id })
         var idNum = productToEdit._id.toString()
-        console.log(idNum)
         res.render('products', {
             title: 'Editar producto - Vencil',
             heading: 'Editar producto',

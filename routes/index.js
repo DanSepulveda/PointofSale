@@ -2,6 +2,7 @@ const express = require("express");
 
 const productControllers = require('../controllers/productControllers')
 const saleControllers = require('../controllers/saleControllers')
+const userControllers = require('../controllers/userControllers')
 
 const router = express.Router()
 
@@ -11,23 +12,20 @@ router.route('/')
 router.route('/escritorio')
     .get(productControllers.dashboard)
 
-router.route('/historial-ventas')
-    .get(productControllers.salesRecord)
-
-router.route('/nueva-compra')
-    .get(productControllers.newPurchase)
-
-router.route('/historial-compras')
-    .get(productControllers.purchasesRecord)
-
-router.route('/clientes')
-    .get(productControllers.clients)
+// USERS
+router.route('/crear-cuenta')
+    .get(userControllers.signUpView)
+    .post(userControllers.signUp)
 
 
 // SALES
 router.route('/nueva-venta')
     .get(productControllers.readProducts)
     .post(saleControllers.createSale)
+
+// revisar
+router.route('/historial-ventas')
+    .get(productControllers.salesRecord)
 
 // PRODUCTS
 router.route('/productos')
