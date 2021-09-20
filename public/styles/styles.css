@@ -28,6 +28,7 @@ nav{
     background-color: #444;
     display: flex;
     flex-direction: column;
+    justify-content: flex-start;
 }
 
 nav img{
@@ -618,7 +619,12 @@ form.newUser{
 
 form.newUser input{
     padding: .5em 1em;
-    margin-bottom: 3vh;
+    margin-bottom: 1vh;
+}
+
+h3.successAccount{
+    text-align: center;
+    color: red;
 }
 
 form.newUser input.userButton{
@@ -666,7 +672,8 @@ form.login input[type=password]::placeholder{
     text-align: center;
 }
 
-form.login input[type=submit]{
+form.login input[type=submit],
+form.newUser input[type=submit] {
     width: 10vw;
     padding: .8em 1em;
     background-color: #F25D19;
@@ -679,7 +686,8 @@ form.login input[type=submit]{
     transition: all 300ms;
 }
 
-form.login input[type=submit]:hover{
+form.login input[type=submit]:hover,
+form.newUser input[type=submit]:hover{
     background-color: #b84713;
 }
 
@@ -688,6 +696,14 @@ form.login input[type=number]::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
+
+form.newUser input[type=number]::-webkit-outer-spin-button,
+form.newUser input[type=number]::-webkit-inner-spin-button{
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+
 
 .mainHome h3.homeErrorMessage{
     margin-top: 2vh;
@@ -756,4 +772,107 @@ form.login input[type=number]::-webkit-inner-spin-button {
 .description button:hover{
     background-color: #146cd6;
     border: 2px solid #0a2f5c;
+}
+
+
+/* DASHBOARD */
+div.dashboard{
+    width: 100%;
+    display: flex;
+}
+
+div.dashboard .boxesContainer{
+    width: 65%;
+    box-shadow: none;
+    padding: 0;
+    background-color: transparent;
+    /* background-color: blue; */
+    justify-content: space-between;
+}
+
+div.dashboard .stockProducts{
+    width: 35%;
+    height: 100%;
+    background-color: blue;
+}
+
+.boxesContainer .resume1,
+.boxesContainer .resume2{
+    height: 100%;
+}
+
+h3.stockTitle{
+    text-align: center;
+    margin-bottom: 2vh;
+}
+
+.lowStockContainer{
+    display: flex;
+    margin-bottom: 5px;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    padding-right: 1em;
+}
+
+.lowStockSection{
+    overflow-y: scroll;
+}
+
+.lowStockPic{
+    width: 50px;
+    height: 50px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border: 1px solid #444;
+    margin-right: 5px;
+}
+
+.stockLow{
+    justify-self: right;
+}
+
+.lowStockContainer>div{
+    display: flex;
+    align-items: center;
+}
+
+.space{
+    flex: 1;
+}
+
+.logOutLink{
+    justify-self: end;
+    font-size: 15px;
+    text-align: center;
+}
+
+.logOutLink:hover{
+    color: #b84713;
+}
+
+.resume1{
+    overflow-y: initial;
+    overflow-x: scroll;
+    width: 100%;
+}
+
+.resume1 h3{
+    width: 100%;
+    text-align: center;
+    margin-top: 3vh;
+    margin-bottom: 2vh;
+}
+
+.saleList{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+table.records{
+    width: 100%;
 }

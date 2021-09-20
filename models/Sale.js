@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
 const saleSchema = new mongoose.Schema({
-    date: { type: Date },
+    date: { type: String, required: true },
     // customer: { type: mongoose.Types.ObjectId, path: "customer" },
     products: [{
         product: { type: mongoose.Types.ObjectId, path: "product" },

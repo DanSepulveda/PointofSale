@@ -17,16 +17,22 @@ const productControllers = {
             newProduct.image = image
             newProduct.price = price
         }
-
         try {
-            await newProduct.save()
-            res.redirect('/productos')
+            if (req.session.loggedIn && req.session.rol === "admin") {
+                await newProduct.save()
+                res.redirect('/productos')
+            } else {
+                throw new Error()
+            }
         } catch (error) {
             res.render('products', {
-                title: 'Productos - Vencil',
+                title: 'Productos - POS',
                 heading: 'Productos',
                 editMode: false,
                 error: true,
+                user: req.session.username,
+                image: req.session.image,
+                rol: req.session.rol,
                 allProducts: []
             })
         }
@@ -36,7 +42,7 @@ const productControllers = {
             const allProducts = await Product.find()
             if (req.session.loggedIn && req.session.rol === "admin") {
                 res.render('products', {
-                    title: 'Productos - Vencil',
+                    title: 'Productos - POS',
                     heading: 'Productos',
                     editMode: false,
                     error: null,
@@ -54,22 +60,34 @@ const productControllers = {
 
     },
     updateProduct: async (req, res) => {
-        const allProducts = await Product.find()
-        const productToEdit = await Product.findOne({ _id: req.params.id })
-        var idNum = productToEdit._id.toString()
-        res.render('products', {
-            title: 'Editar producto - Vencil',
-            heading: 'Editar producto',
-            editMode: productToEdit,
-            error: null,
-            allProducts
-        })
-
+        try {
+            if (req.session.loggedIn && req.session.rol === "admin") {
+                const allProducts = await Product.find()
+                const productToEdit = await Product.findOne({ _id: req.params.id })
+                var idNum = productToEdit._id.toString()
+                res.render('products', {
+                    title: 'Editar Producto - POS',
+                    heading: 'Editar Producto',
+                    editMode: productToEdit,
+                    error: null,
+                    user: req.session.username,
+                    image: req.session.image,
+                    rol: req.session.rol,
+                    allProducts
+                })
+            } else {
+                throw new Error()
+            }
+        } catch (error) {
+            res.redirect('/')
+        }
     },
     deleteProduct: async (req, res) => {
         try {
-            await Product.findOneAndDelete({ _id: req.params.id })
-            res.json({ success: true })
+            if (req.session.loggedIn && req.session.rol === "admin") {
+                await Product.findOneAndDelete({ _id: req.params.id })
+                res.json({ success: true })
+            }
         } catch (error) {
             res.json({ success: false })
         }

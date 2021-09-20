@@ -2,26 +2,27 @@
     <%- include('partials/header.ejs') %>
         <div class="mainContainer">
             <div class="newAccount">
-                <% if(message){%>
-                    <h1>Usuario Registrado</h1>
-                    <%}%>
-                        <form action="" method="POST" class="newUser">
+
+                <form action="" method="POST" class="newUser">
+                    <% if(message){%>
+                        <h3 class="successAccount">Usuario Registrado Exitosamente</h3>
+                        <%}%>
                             <label for="name">Nombre</label>
-                            <input type="text" name="name" id="name">
+                            <input type="text" name="name" id="name" required>
                             <label for="lastName">Apellido</label>
-                            <input type="text" name="lastName" id="lastName">
+                            <input type="text" name="lastName" id="lastName" required>
                             <label for="dni">RUT</label>
-                            <input type="text" name="dni" id="dni">
+                            <input type="number" name="dni" id="dni" required>
                             <label for="address">Dirección</label>
-                            <input type="text" name="address" id="address">
+                            <input type="text" name="address" id="address" required>
                             <label for="image">URL Imagen</label>
-                            <input type="text" name="image" id="image">
+                            <input type="text" name="image" id="image" required>
                             <label for="email">Email</label>
-                            <input type="email" name="email" id="email">
+                            <input type="email" name="email" id="email" required>
                             <label for="password">Contraseña</label>
-                            <input type="password" name="password" id="password">
+                            <input type="password" name="password" id="password" required>
                             <input type="submit" value="Registrar Usuario" class="userButton">
-                        </form>
+                </form>
             </div>
         </div>
         <%- include('partials/footer.ejs') %>

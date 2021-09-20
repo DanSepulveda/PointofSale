@@ -1,5 +1,64 @@
 <%- include('partials/head.ejs') %>
     <%- include('partials/header.ejs') %>
         <div class="mainContainer">
+            <div class="dashboard">
+                <div class="boxesContainer resume">
+                    <div class="products resume1">
+                        <h3>Últimas Ventas</h3>
+                        <div class="saleList">
+                            <table class="records">
+                                <thead>
+                                    <tr>
+                                        <th>Fecha</th>
+                                        <th>Cantidad de Productos</th>
+                                        <th>Forma de Pago</th>
+                                        <th>Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <%sales.forEach((sale)=>{%>
+                                        <tr>
+                                            <td>
+                                                <%= sale.date%>
+                                            </td>
+                                            <td>
+                                                <%= sale.productQty%>
+                                            </td>
+                                            <td>
+                                                <%= sale.paymentMethod%>
+                                            </td>
+                                            <td>
+                                                <%= sale.total%>
+                                            </td>
+                                        </tr>
+                                        <%})%>
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="resume">
+                    <h3 class="stockTitle">Productos con bajo Stock</h3>
+                    <div class="lowStockSection">
+                        <% products.filter((product)=>{%>
+                            <%if(product.stock<10){%>
+                                <div class="lowStockContainer">
+                                    <div>
+                                        <div class="lowStockPic"
+                                            style="background-image: url('/assets/products/<%=product.image%>');"></div>
+                                        <span>
+                                            <%=product.name%>
+                                        </span>
+                                    </div>
+                                    <span class="stockLow">
+                                        <%=product.stock%>
+                                    </span>
+                                </div>
+                                <%}%>
+                                    <%})%>
+                    </div>
+                </div>
+            </div>
         </div>
         <%- include('partials/footer.ejs') %>

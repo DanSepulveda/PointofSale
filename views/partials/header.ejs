@@ -2,31 +2,32 @@
     <header>
         <nav>
             <img src="./assets/logo.png" alt="">
-            <a href="/escritorio">
+            <a href="/escritorio" class="<%- title.includes('Dashboard')?'active':null%>">
                 <i class="fas fa-tachometer-alt"></i>
                 <span>Escritorio</span>
             </a>
             <p>Ventas</p>
-            <a href="/nueva-venta" class="active">
+            <a href="/nueva-venta" class="<%- title.includes('Nueva Venta')?'active':null%>">
                 <i class="fas fa-cash-register"></i>
                 <span>Nueva</span>
             </a>
-            <a href="/historial-ventas">
+            <!-- <a href="/historial-ventas" class="<%- title.includes('Historial')?'active':null%>">
                 <i class="far fa-file-alt"></i>
                 <span>Historial</span>
-            </a>
+            </a> -->
             <%if(rol==="admin"){%>
                 <p>Negocio</p>
-                <a href="/crear-cuenta">
+                <a href="/crear-cuenta" class="<%- title.includes('Empleado')?'active':null%>">
                     <i class="fas fa-address-card"></i>
                     <span>Nuevo Empleado</span>
                 </a>
-                <a href="/productos">
+                <a href="/productos" class="<%- title.includes('Producto')?'active':null%>">
                     <i class="fas fa-bread-slice"></i>
                     <span>Productos</span>
                 </a>
+                <div class="space"></div>
                 <%}%>
-                    <a href="/salir">Desconectarse</a>
+                    <a class="logOutLink" href="/salir">Desconectarse</a>
 
         </nav>
     </header>

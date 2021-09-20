@@ -32,29 +32,35 @@ const saleControllers = {
                 res.redirect('/')
             }
         } catch (error) {
-            console.log(error)
+            res.redirect('/nueva-venta')
         }
     },
     createSale: async (req, res) => {
         try {
-            let products = JSON.parse(req.body.products)
-            let paymentMethod = req.body.paymentMethod
-            const newSale = new Sale({
-                products,
-                paymentMethod,
-                date: new Date()
-            })
-            await newSale.save()
-            products.forEach(async (product) => {
-                let chosen = await Product.findOne({ _id: product.product })
-                let newStock = chosen.stock - product.qty
-                await Product.findOneAndUpdate(
-                    { _id: product.product },
-                    { stock: newStock },
-                    { new: true }
-                )
-            })
-            res.redirect('/nueva-venta')
+            if (req.session.loggedIn) {
+                let products = JSON.parse(req.body.products)
+                let paymentMethod = req.body.paymentMethod
+                let date = new Date()
+                date = date.toLocaleDateString()
+                const newSale = new Sale({
+                    products,
+                    paymentMethod,
+                    date
+                })
+                await newSale.save()
+                products.forEach(async (product) => {
+                    let chosen = await Product.findOne({ _id: product.product })
+                    let newStock = chosen.stock - product.qty
+                    await Product.findOneAndUpdate(
+                        { _id: product.product },
+                        { stock: newStock },
+                        { new: true }
+                    )
+                })
+                res.redirect('/nueva-venta')
+            } else {
+                throw new Error()
+            }
         } catch (error) {
             let allProducts = await Product.find()
             let categories = [
@@ -81,15 +87,25 @@ const saleControllers = {
             })
         }
     },
-    salesRecord: (req, res) => {
-        res.render('sales-records', {
-            title: 'Historial de Ventas - Vencial',
-            heading: 'Historial de Ventas',
-            user: req.session.username,
-            image: req.session.image,
-            rol: req.session.rol,
-        })
-    },
+    // salesRecord: async (req, res) => {
+    //     try {
+    //         if (req.session.loggedIn) {
+    //             let sales = await Sale.find()
+    //             res.render('sales-records', {
+    //                 title: 'Historial de Ventas - POS',
+    //                 heading: 'Historial de Ventas',
+    //                 user: req.session.username,
+    //                 image: req.session.image,
+    //                 rol: req.session.rol,
+    //                 sales
+    //             })
+    //         } else {
+    //             throw new Error()
+    //         }
+    //     } catch (error) {
+    //         res.redirect('/')
+    //     }
+    // },
 }
 
 module.exports = saleControllers

@@ -2,7 +2,6 @@ const express = require("express");
 const router = require("./routes/index");
 require("dotenv").config();
 require("./config/database");
-// require("./config/passport")
 const session = require("express-session")
 const mongo = require('connect-mongodb-session')(session)
 const store = new mongo({

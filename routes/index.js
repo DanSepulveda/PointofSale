@@ -26,8 +26,8 @@ router.route('/nueva-venta')
     .get(saleControllers.showProducts)
     .post(saleControllers.createSale)
 
-router.route('/historial-ventas')
-    .get(saleControllers.salesRecord)
+// router.route('/historial-ventas')
+//     .get(saleControllers.salesRecord)
 
 // PRODUCTS
 router.route('/productos')
