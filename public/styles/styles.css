@@ -876,3 +876,22 @@ h3.stockTitle{
 table.records{
     width: 100%;
 }
+
+.records th{
+    padding: .5em 0;
+    background-color: #444;
+    color: white;
+}
+
+.records tbody tr{
+    padding: .5em 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+}
+
+.records td{
+    padding: .5em 0;
+}
+
+.records tbody tr:nth-child(2n){
+    background-color: #eee;
+}
