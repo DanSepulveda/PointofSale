@@ -15,24 +15,18 @@
                 <i class="far fa-file-alt"></i>
                 <span>Historial</span>
             </a>
-            <!-- <p>Compras</p>
-    <a href="/nueva-compra">
-        <i class="fas fa-shopping-bag"></i>
-        <span>Nueva</span>
-    </a>
-    <a href="/historial-compras">
-        <i class="far fa-file-alt"></i>
-        <span>Compras</span>
-    </a> -->
-            <p>Negocio</p>
-            <a href="/crear-cuenta">
-                <i class="fas fa-address-card"></i>
-                <span>Nuevo Empleado</span>
-            </a>
-            <a href="/productos">
-                <i class="fas fa-bread-slice"></i>
-                <span>Productos</span>
-            </a>
+            <%if(rol==="admin"){%>
+                <p>Negocio</p>
+                <a href="/crear-cuenta">
+                    <i class="fas fa-address-card"></i>
+                    <span>Nuevo Empleado</span>
+                </a>
+                <a href="/productos">
+                    <i class="fas fa-bread-slice"></i>
+                    <span>Productos</span>
+                </a>
+                <%}%>
+                    <a href="/salir">Desconectarse</a>
 
         </nav>
     </header>
@@ -46,7 +40,8 @@
 
             </div>
             <div class="user">
-                <span>Welcome, Tony</span>
-                <div class="userPic" style="background-image: url('./assets/ironman.png');"></div>
+                <span>Bienvenido, <%= user%></span>
+                <div class="userPic" style="background-image: url('./assets/users/<%= image%>');">
+                </div>
             </div>
         </div>

@@ -31,8 +31,10 @@ nav{
 }
 
 nav img{
+    width: 60%;
     margin-top: 3vh;
     margin-bottom: 5vh;
+    align-self: center;
 }
 
 nav a,
@@ -639,6 +641,7 @@ div.mainHome{
 
 div.mainHome img{
     width: 20%;
+    margin-bottom: 5vh;
 }
 
 div.mainHome form.login{
@@ -647,7 +650,7 @@ div.mainHome form.login{
     align-items: center;
 }
 
-form.login input[type=text],
+form.login input[type=number],
 form.login input[type=password]{
     width: 20vw;
     margin-bottom: 3vh;
@@ -658,7 +661,7 @@ form.login input[type=password]{
     color: #86091c;
 }
 
-form.login input[type=text]::placeholder,
+form.login input[type=number]::placeholder,
 form.login input[type=password]::placeholder{
     text-align: center;
 }
@@ -678,6 +681,19 @@ form.login input[type=submit]{
 
 form.login input[type=submit]:hover{
     background-color: #b84713;
+}
+
+form.login input[type=number]::-webkit-outer-spin-button,
+form.login input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.mainHome h3.homeErrorMessage{
+    margin-top: 2vh;
+    color: red;
+    height: 18px;
+    line-height: 18px;
 }
 
 .errorContainer{

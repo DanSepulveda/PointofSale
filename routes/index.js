@@ -6,26 +6,28 @@ const userControllers = require('../controllers/userControllers')
 
 const router = express.Router()
 
+// USERS
 router.route('/')
-    .get(productControllers.home)
+    .get(userControllers.signInView)
+    .post(userControllers.signIn)
 
 router.route('/escritorio')
-    .get(productControllers.dashboard)
+    .get(userControllers.dashboard)
 
-// USERS
 router.route('/crear-cuenta')
     .get(userControllers.signUpView)
     .post(userControllers.signUp)
 
+router.route('/salir')
+    .get(userControllers.signOut)
 
 // SALES
 router.route('/nueva-venta')
-    .get(productControllers.readProducts)
+    .get(saleControllers.showProducts)
     .post(saleControllers.createSale)
 
-// revisar
 router.route('/historial-ventas')
-    .get(productControllers.salesRecord)
+    .get(saleControllers.salesRecord)
 
 // PRODUCTS
 router.route('/productos')

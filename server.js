@@ -1,17 +1,27 @@
 const express = require("express");
-// const cors = require("cors");
 const router = require("./routes/index");
 require("dotenv").config();
 require("./config/database");
 // require("./config/passport")
+const session = require("express-session")
+const mongo = require('connect-mongodb-session')(session)
+const store = new mongo({
+    uri: process.env.MONGODB,
+    collection: 'sessions'
+})
 
 const app = express()
 
 // MIDDLEWARE
 app.use(express.static('public'))
 app.set('view engine', 'ejs')
-// app.use(cors())
 app.use(express.urlencoded({ extended: true }))
+app.use(session({
+    secret: process.env.SECRET,
+    resave: false,
+    saveUninitialized: false,
+    store,
+}))
 
 
 app.use('/', router)
